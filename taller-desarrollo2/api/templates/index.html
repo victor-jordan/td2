@@ -1,0 +1,46 @@
+<html>
+<head>
+    <title>API desde python</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/mvp.css/1.6.3/mvp.min.css">
+</head>
+<body>
+    <section><h1>API con PYTHON, FLASK y SQLALCHEMY</h1></section>
+    <section>
+    <article>
+        <aside><p>Lo bueno de las APIS es que no se mezclan con el diseño</p></aside>
+    </article>
+    </section>
+    <section>
+    <table>
+        <thead>
+            <tr><th colspan="3">Tabla productos desde API</th></tr>
+            <tr><th>id</th><th>nombre</th><th>precio</th></tr>
+        </thead>
+        <tbody id="ejemplo">
+            <!-- el body esta vacio, porque los datos los estiramos desde la API. -->
+        </tbody>
+    </table>
+    </section>
+</body>
+<script>
+fetch('http://127.0.0.1:5000/productos')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(datos) {
+    const tabla = document.getElementById("ejemplo");
+    // var i = 0;
+    datos.productos.forEach(function(productos) {
+      // console.log(i);
+      // i++;
+      const fila = tabla.insertRow(0);
+      const id = fila.insertCell(0);
+      const nombre = fila.insertCell(1);
+      const precio = fila.insertCell(2);
+      id.innerHTML = productos.id;
+      nombre.innerHTML = productos.nombre;
+      precio.innerHTML = productos.precio;
+    });
+  });
+</script>
+</html>
